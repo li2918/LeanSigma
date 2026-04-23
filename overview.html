@@ -41,6 +41,30 @@
       const nav = document.getElementById('phase-nav');
       const root = document.getElementById('phases');
 
+      function renderDetail(detail) {
+        if (!detail) return '';
+        let html = '<details class="topic-detail"><summary>查看详解与例题</summary><div class="topic-detail-body">';
+        if (detail.concept) {
+          html += '<div class="detail-concept">' + detail.concept + '</div>';
+        }
+        if (detail.formulas && detail.formulas.length) {
+          html += '<div class="detail-formulas"><div class="detail-label">关键公式</div><ul>';
+          detail.formulas.forEach(f => { html += '<li><code>' + f + '</code></li>'; });
+          html += '</ul></div>';
+        }
+        if (detail.examples && detail.examples.length) {
+          detail.examples.forEach(ex => {
+            html += '<div class="detail-example">';
+            if (ex.title) html += '<div class="example-title">' + ex.title + '</div>';
+            html += '<div class="example-problem"><span class="example-tag">题目</span>' + ex.problem + '</div>';
+            html += '<div class="example-solution"><span class="example-tag solution">解答</span>' + ex.solution + '</div>';
+            html += '</div>';
+          });
+        }
+        html += '</div></details>';
+        return html;
+      }
+
       OVERVIEW_DATA.forEach(phase => {
         const chip = document.createElement('a');
         chip.href = '#' + phase.id;
@@ -69,7 +93,7 @@
           const card = document.createElement('div');
           card.className = 'topic-card';
           const ul = topic.items.map(i => `<li>${i}</li>`).join('');
-          card.innerHTML = `<h4>${topic.name}</h4><ul>${ul}</ul>`;
+          card.innerHTML = `<h4>${topic.name}</h4><ul>${ul}</ul>${renderDetail(topic.detail)}`;
           grid.appendChild(card);
         });
         section.appendChild(grid);
