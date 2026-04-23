@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模拟考试 — Lean Six Sigma Green Belt</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="nav-brand"><span class="sigma">Σ</span>Lean Six Sigma GB</a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="overview.html">知识总览</a></li>
+        <li><a href="exam.html" class="active">模拟考试</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-title">
+      <h1>模拟考试</h1>
+      <p>选择题量、时长与范围，计时答题后查看分数与每题解析。</p>
+    </div>
+
+    <section id="setup" class="exam-setup">
+      <h2>开始前设置</h2>
+      <p>建议按 1.5 分钟/题的节奏练习。通过分数线 70%。</p>
+      <div class="setup-row">
+        <div class="setup-field">
+          <label for="num-questions">题量</label>
+          <select id="num-questions">
+            <option value="10">10 题 (快速练习)</option>
+            <option value="20" selected>20 题 (标准)</option>
+            <option value="30">30 题 (加强)</option>
+            <option value="50">50 题 (全真模拟)</option>
+          </select>
+        </div>
+        <div class="setup-field">
+          <label for="duration">时长</label>
+          <select id="duration">
+            <option value="15">15 分钟</option>
+            <option value="30" selected>30 分钟</option>
+            <option value="45">45 分钟</option>
+            <option value="60">60 分钟</option>
+            <option value="90">90 分钟</option>
+          </select>
+        </div>
+        <div class="setup-field">
+          <label for="phase-filter">范围</label>
+          <select id="phase-filter">
+            <option value="all" selected>全部 DMAIC</option>
+            <option value="define">仅 Define</option>
+            <option value="measure">仅 Measure</option>
+            <option value="analyze">仅 Analyze</option>
+            <option value="improve">仅 Improve</option>
+            <option value="control">仅 Control</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="start-btn">开始考试</button>
+    </section>
+
+    <section id="exam" hidden>
+      <div class="exam-bar">
+        <div class="exam-progress" id="progress"></div>
+        <div class="exam-timer" id="timer">00:00</div>
+      </div>
+      <div class="question-card" id="question"></div>
+      <div class="exam-actions">
+        <button class="btn btn-secondary" id="prev-btn">上一题</button>
+        <button class="btn btn-primary" id="next-btn">下一题</button>
+        <button class="btn btn-primary" id="submit-btn" style="display:none;">提交</button>
+      </div>
+    </section>
+
+    <section id="results" class="results" hidden></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      持续学习，持续改善 · Kaizen
+    </div>
+  </footer>
+
+  <script src="js/questions.js"></script>
+  <script src="js/exam.js"></script>
+</body>
+</html>

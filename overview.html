@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知识点总览 — Lean Six Sigma Green Belt</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="nav-brand"><span class="sigma">Σ</span>Lean Six Sigma GB</a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="overview.html" class="active">知识总览</a></li>
+        <li><a href="exam.html">模拟考试</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-title">
+      <h1>Green Belt 知识总览</h1>
+      <p>按 DMAIC 五阶段梳理考试核心知识点，参考 ASQ CSSGB / IASSC Green Belt BOK。</p>
+    </div>
+
+    <nav class="phase-nav" id="phase-nav"></nav>
+
+    <div id="phases"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      持续学习，持续改善 · Kaizen
+    </div>
+  </footer>
+
+  <script src="js/overview-data.js"></script>
+  <script>
+    (function render() {
+      const nav = document.getElementById('phase-nav');
+      const root = document.getElementById('phases');
+
+      OVERVIEW_DATA.forEach(phase => {
+        const chip = document.createElement('a');
+        chip.href = '#' + phase.id;
+        chip.className = 'phase-chip';
+        chip.textContent = phase.letter + ' · ' + phase.title;
+        nav.appendChild(chip);
+
+        const section = document.createElement('section');
+        section.className = 'phase-section ' + phase.phaseClass;
+        section.id = phase.id;
+
+        const header = document.createElement('div');
+        header.className = 'phase-header';
+        header.innerHTML = `
+          <div class="phase-letter">${phase.letter}</div>
+          <div>
+            <div class="phase-title">${phase.title}</div>
+            <div class="phase-subtitle">${phase.subtitle}</div>
+          </div>
+        `;
+        section.appendChild(header);
+
+        const grid = document.createElement('div');
+        grid.className = 'topic-grid';
+        phase.topics.forEach(topic => {
+          const card = document.createElement('div');
+          card.className = 'topic-card';
+          const ul = topic.items.map(i => `<li>${i}</li>`).join('');
+          card.innerHTML = `<h4>${topic.name}</h4><ul>${ul}</ul>`;
+          grid.appendChild(card);
+        });
+        section.appendChild(grid);
+        root.appendChild(section);
+      });
+    })();
+  </script>
+</body>
+</html>
